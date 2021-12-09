@@ -9,8 +9,9 @@ public class CardScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = imagen;
-        transform.position = new Vector3(-1, 3, 01);
+          GetComponent<SpriteRenderer>().sprite = imagen;
+          transform.position = new Vector3(-1, 3, 01);
+        
     }
 
     // Update is called once per frame
