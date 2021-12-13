@@ -8,10 +8,13 @@ public class CardScript : MonoBehaviour
     public Sprite front;
     public Sprite back;
     bool faceUp = false;
+    GameObject myGameManager;
+    public int tipo;
 
     private void Awake()
     {
         myRenderer = GetComponent<SpriteRenderer>();
+        myGameManager = GameObject.FindGameObjectWithTag("GameController");
     }
 
     // Start is called before the first frame update
@@ -22,7 +25,8 @@ public class CardScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("He hecho clic en la carta" + name);
+        //Debug.Log("He hecho clic en la carta" + name);
+        myGameManager.GetComponent<GameManagerScript>().ClickOnCard(tipo);
 
         if (!faceUp)
         {

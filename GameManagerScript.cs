@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
     public List<GameObject> listaCartas = new List<GameObject>();
     public List<Sprite> cartasFront;
     int[] contador = { 0, 0, 0, 0, 0};
+    int[] tipos = { 7, 1, 0, 9, 6 };
 
     GameObject carta_nueva;
 
@@ -37,6 +38,7 @@ public class GameManagerScript : MonoBehaviour
             }
 
             carta_nueva.GetComponent<CardScript>().front = cartasFront[pos];
+            carta_nueva.GetComponent<CardScript>().tipo = tipos[pos];
             
             listaCartas.Add(carta_nueva);
 
@@ -50,15 +52,14 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    public void ClickOnCard(int t)
+    {
+        Debug.Log("He hecho click en la carta " + t);
+    }
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    void OnMouseDown()
-    {
-        // Destroy the gameObject after clicking on it
-        Debug.Log("Has hecho clic en: " + carta_nueva.name);
-    }
 }
