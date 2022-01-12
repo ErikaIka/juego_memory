@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject myPrefab;
+    public GameObject texto;
     public List<GameObject> listaCartas = new List<GameObject>();
     public List<Sprite> cartasFront;
     int[] contador = { 0, 0, 0, 0, 0};
     int[] tipos = { 7, 1, 0, 9, 6 };
     int state = 1;
     int cardUp, cardUpIndex;
+    int contadorParejas = 0;
     GameObject carta_nueva;
 
     // Start is called before the first frame update
@@ -52,6 +55,8 @@ public class GameManagerScript : MonoBehaviour
                 posY = -2;
             }
         }
+
+        texto.GetComponent<Text>().text = "Num Parejas: 0";
     }
 
     public void ClickOnCard(int t, int index)
@@ -71,6 +76,8 @@ public class GameManagerScript : MonoBehaviour
                 Debug.Log("Pareja encontrada!!");
                 listaCartas[index].SetActive(false);
                 listaCartas[cardUpIndex].SetActive(false);
+                contadorParejas++;
+                texto.GetComponent<Text>().text = "Num. parejas " + contadorParejas;
             }
             else
             {
