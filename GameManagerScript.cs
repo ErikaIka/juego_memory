@@ -10,7 +10,7 @@ public class GameManagerScript : MonoBehaviour
     int[] contador = { 0, 0, 0, 0, 0};
     int[] tipos = { 7, 1, 0, 9, 6 };
     int state = 1;
-    int cardUp;
+    int cardUp, cardUpIndex;
     GameObject carta_nueva;
 
     // Start is called before the first frame update
@@ -40,7 +40,8 @@ public class GameManagerScript : MonoBehaviour
 
             carta_nueva.GetComponent<CardScript>().front = cartasFront[pos];
             carta_nueva.GetComponent<CardScript>().tipo = tipos[pos];
-            
+            carta_nueva.GetComponent<CardScript>().index = i;
+
             listaCartas.Add(carta_nueva);
 
             posX += 3;
@@ -53,13 +54,14 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void ClickOnCard(int t)
+    public void ClickOnCard(int t, int index)
     {
         Debug.Log("He hecho click en la carta " + t);
 
         if (state == 1)
         {
             cardUp = t;
+            cardUpIndex = index;
             state = 2;
         }
         else //state 2
@@ -67,13 +69,25 @@ public class GameManagerScript : MonoBehaviour
             if (t == cardUp)
             {
                 Debug.Log("Pareja encontrada!!");
+                listaCartas[index].SetActive(false);
+                listaCartas[cardUpIndex].SetActive(false);
             }
             else
             {
                 Debug.Log("No hay pareja, sigue probando");
+                StartCoroutine(WaitAndPrint(index));
+
             }
             state = 1;
         }
+    }
+
+    IEnumerator WaitAndPrint(int i)
+    {
+        yield return new WaitForSeconds(2);
+        listaCartas[i].GetComponent<CardScript>().Toggle();
+        listaCartas[cardUpIndex].GetComponent<CardScript>().Toggle();
+
     }
     // Update is called once per frame
     void Update()

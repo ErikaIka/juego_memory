@@ -10,6 +10,7 @@ public class CardScript : MonoBehaviour
     bool faceUp = false;
     GameObject myGameManager;
     public int tipo;
+    public int index;
 
     private void Awake()
     {
@@ -26,12 +27,18 @@ public class CardScript : MonoBehaviour
     private void OnMouseDown()
     {
         //Debug.Log("He hecho clic en la carta" + name);
-        myGameManager.GetComponent<GameManagerScript>().ClickOnCard(tipo);
+        myGameManager.GetComponent<GameManagerScript>().ClickOnCard(tipo, index);
 
+        Toggle();
+ 
+    }
+
+    public void Toggle()
+    {
         if (!faceUp)
         {
             myRenderer.sprite = front;
-            
+
         }
         else
         {
