@@ -9,7 +9,8 @@ public class GameManagerScript : MonoBehaviour
     public List<Sprite> cartasFront;
     int[] contador = { 0, 0, 0, 0, 0};
     int[] tipos = { 7, 1, 0, 9, 6 };
-
+    int state = 1;
+    int cardUp;
     GameObject carta_nueva;
 
     // Start is called before the first frame update
@@ -55,6 +56,24 @@ public class GameManagerScript : MonoBehaviour
     public void ClickOnCard(int t)
     {
         Debug.Log("He hecho click en la carta " + t);
+
+        if (state == 1)
+        {
+            cardUp = t;
+            state = 2;
+        }
+        else //state 2
+        {
+            if (t == cardUp)
+            {
+                Debug.Log("Pareja encontrada!!");
+            }
+            else
+            {
+                Debug.Log("No hay pareja, sigue probando");
+            }
+            state = 1;
+        }
     }
     // Update is called once per frame
     void Update()
